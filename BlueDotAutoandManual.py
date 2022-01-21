@@ -66,7 +66,7 @@ GPIO.setup(15,GPIO.OUT)
                 GPIO.output(15,False)
 		print('Stop')
 
-bd = BlueDot(cols=5, row=3)
+bd = BlueDot(cols=3, row=5)
 bd.color = "blue"
 bd.square = True
 
@@ -74,16 +74,14 @@ bd[0,0].visible = False
 bd[2,0].visible = False
 bd[0,2].visible = False
 bd[2,2].visible = False
-bd[0,3].visible = False
-bd[0,4].visible = False
-bd[0,5].visible = False
-bd[1,3].visible = False
-bd[2,3].visible = False
-bd[2,4].visible = False
+bd[3,0].visible = False
+bd[4,0].visible = False
+bd[3,2].visible = False
+bd[4,2].visible = False
 
 bd[1,1].color = "red"
-bd[1,4].circle = True
-bd[1,4].color = "green"
+bd[4,1].circle = True
+bd[4,1].color = "green"
 
 #MANUAL CONTROLS
 bd[1,0].when_pressed = up
@@ -93,8 +91,8 @@ bd[2,1].when_pressed = right
 bd[1,1].when_pressed = middle
 
 #AUTOMATICALLY MOVE 2 METERS AND STOP 
-bd[1,4].when_pressed = auto
-bd[1,4].when_moved = auto
+bd[4,1].when_pressed = auto
+bd[4,1].when_moved = auto
 
 GPIO.cleanup()
 pause()
