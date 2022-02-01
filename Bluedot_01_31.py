@@ -64,7 +64,19 @@ class RobotControls:
         self.GPIO.output(13, False)
         self.GPIO.output(15, False)
 
+#Record video footage when button double-pressed
 
+    def record(self):
+	print('Recording')
+	stream = BytesIO()
+	camera = PiCamera()
+	camera.resolution = (640, 480)
+	camera.start_recording(stream, format='h264', quality=23) #this is to save to a stream
+	camera.start_recording('my_video.h264') #This is to save to a file
+	camera.wait_recording(15)
+	camera.stop_recording()
+
+	
 #AUTO OPERATIONS Drive forward 2 seconds and stop
 
     def auto(self):
@@ -80,6 +92,7 @@ class RobotControls:
         self.GPIO.output(11, False)
         self.GPIO.output(13, False)
         self.GPIO.output(15, False)
+	
 		
 #Buttons Layout and Responses to when pressed		
 
