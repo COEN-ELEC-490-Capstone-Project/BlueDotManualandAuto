@@ -8,66 +8,80 @@ from io import BytesIO
 from picamera import PiCamera
 
 #set GPIO numbering mode and define output pins
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(7,GPIO.OUT)
-GPIO.setup(11,GPIO.OUT)
-GPIO.setup(13,GPIO.OUT)
-GPIO.setup(15,GPIO.OUT)
+#GPIO.setmode(GPIO.BOARD)
+#GPIO.setup(7,GPIO.OUT)
+#GPIO.setup(11,GPIO.OUT)
+#GPIO.setup(13,GPIO.OUT)
+#GPIO.setup(15,GPIO.OUT)
 
 #MANUAL OPERATIONS
 
-            def up():
-                GPIO.output(7,False)
-                GPIO.output(11,True)
-                GPIO.output(13,False)
-                GPIO.output(15,True)
-		print('Top')
+class RobotControls:
+    def __init__(self):
+        self.GPIO.setmode(GPIO.BOARD)
+        self.GPIO.setup(7, GPIO.OUT)
+        self.GPIO.setup(11, GPIO.OUT)
+        self.GPIO.setup(13, GPIO.OUT)
+        self.GPIO.setup(15, GPIO.OUT)
 
-            def down():
-                GPIO.output(7,True)
-                GPIO.output(11,False)
-                GPIO.output(13,True)
-                GPIO.output(15,False)
-		print('Bottom')
+    def up(self):
+        print('Top')
+        self.GPIO.output(7, False)
+        self.GPIO.output(11, True)
+        self.GPIO.output(13, False)
+        self.GPIO.output(15, True)
 
-            def right():
-                GPIO.output(7,True)
-                GPIO.output(11,False)
-                GPIO.output(13,False)
-                GPIO.output(15,True)
-		print('Right')
 
-            def left():
-                GPIO.output(7,False)
-                GPIO.output(11,True)
-                GPIO.output(13,True)
-                GPIO.output(15,False)
-		print('Left')
+    def down(self):
+        print('Bottom')
+        self.GPIO.output(7, True)
+        self.GPIO.output(11, False)
+        self.GPIO.output(13, True)
+        self.GPIO.output(15, False)
 
-#Act as a turn off
-            def middle():
-                GPIO.output(7,False)
-                GPIO.output(11,False)
-                GPIO.output(13,False)
-                GPIO.output(15,False)
-		print('Stop')
-          
+
+    def right(self):
+        print('Right')
+        self.GPIO.output(7, True)
+        self.GPIO.output(11, False)
+        self.GPIO.output(13, False)
+        self.GPIO.output(15, True)
+
+
+    def left(self):
+        print('Left')
+        self.GPIO.output(7, False)
+        self.GPIO.output(11, True)
+        self.GPIO.output(13, True)
+        self.GPIO.output(15, False)
+
+
+    #Act as a turn off
+    def middle(self):
+        print('Stop')
+        self.GPIO.output(7, False)
+        self.GPIO.output(11, False)
+        self.GPIO.output(13, False)
+        self.GPIO.output(15, False)
+
+
 #AUTO OPERATIONS Drive forward 2 seconds and stop
 
-            def auto():
-     # When "toggle" is pressed, exit from this function thus bringing back to manual mode
-  #   while not ()
-                GPIO.output(7,False)
-                GPIO.output(11,True)
-                GPIO.output(13,False)
-                GPIO.output(15,True)
-		print('Top')
-  		time.sleep(2)
-                GPIO.output(7,False)
-                GPIO.output(11,False)
-                GPIO.output(13,False)
-                GPIO.output(15,False)
-		print('Stop')
+    def auto(self):
+        print('Top')
+        self.GPIO.output(7, False)
+        self.GPIO.output(11, True)
+        self.GPIO.output(13, False)
+        self.GPIO.output(15, True)
+
+        time.sleep(2)
+        print('Stop')
+        self.GPIO.output(7, False)
+        self.GPIO.output(11, False)
+        self.GPIO.output(13, False)
+        self.GPIO.output(15, False)
+		
+#Buttons Layout and Responses to when pressed		
 
 bd = BlueDot(row=5, cols=3)
 bd.color = "blue"
@@ -99,5 +113,5 @@ bd[0,2].when_pressed = auto
 bd[0,2].when_moved = auto
 bd[0,2].when_double_pressed = toggle
 
-GPIO.cleanup()
+#GPIO.cleanup()
 pause()
